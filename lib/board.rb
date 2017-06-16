@@ -13,6 +13,15 @@ class Board
     @grid
   end
 
+  def [](pos)
+    x,y = pos
+    @grid[x][y]
+  end
+
+  def []=(x, y, mark)
+    @grid[x][y] = mark
+  end
+
   def count
     self.grid.flatten.select {|el| !el.nil? }.size
   end

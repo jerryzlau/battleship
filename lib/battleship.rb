@@ -11,6 +11,7 @@ class BattleshipGame
     @board.grid[x][y] = :x
   end
 
+
   def count
     @board.count
   end
