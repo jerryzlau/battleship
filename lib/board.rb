@@ -44,6 +44,23 @@ class Board
     puts ""
     @grid.each do |row|
       row.each do |pos|
+        if pos == :s || pos.nil?
+          print "|   |"
+        elsif !pos.nil?
+          print "| #{pos} |"
+        end
+      end
+      print "\n"
+    end
+    print "-" * @grid.length * 5
+    print "\n"
+  end
+
+  def reveal
+    print "-" * @grid.length * 5
+    puts ""
+    @grid.each do |row|
+      row.each do |pos|
         if !pos.nil?
           print "| #{pos} |"
         else

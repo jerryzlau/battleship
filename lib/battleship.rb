@@ -12,7 +12,11 @@ class BattleshipGame
 
   def attack(pos)
     x, y = pos.first, pos.last
-    @board.grid[x][y] = :x
+    if @board.grid[x][y] == :s
+      @board.grid[x][y] = "!"
+    else
+      @board.grid[x][y] = :x
+    end
   end
 
   def count
@@ -33,6 +37,7 @@ class BattleshipGame
       @board.display
       play_turn
     end
+    @board.reveal
     puts "Congrats #{player.name}! You have won!"
   end
 
