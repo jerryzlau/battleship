@@ -1,24 +1,24 @@
 class Board
 
-  attr_reader :grid
+  attr_accessor :grid
 
   def initialize(grid= Board.default_grid)
     @grid = grid
   end
 
   def self.default_grid
-    @grid = []
-    row = Array.new(10)
-    10.times {@grid << row}
-    @grid
+    @grid = Array.new(10) {Array.new(10)}
   end
 
   def [](pos)
-    x,y = pos
+    x = pos.first
+    y = pos.last
     @grid[x][y]
   end
 
-  def []=(x, y, mark)
+  def []=(pos, mark)
+    x = pos.first
+    y = pos.last
     @grid[x][y] = mark
   end
 
@@ -30,7 +30,8 @@ class Board
     return true if self.count == 0
     return false if pos.nil?
 
-    x, y = pos.first, pos.last
+    x = pos.first
+    y = pos.last
     self.grid[x][y].nil?
   end
 
@@ -38,12 +39,29 @@ class Board
     self.count == self.grid.flatten.size
   end
 
+  def display
+    print "-" * @grid.length * 5
+    puts ""
+    @grid.each do |row|
+      row.each do |pos|
+        if !pos.nil?
+          print "| #{pos} |"
+        else
+          print "|   |"
+        end
+      end
+      print "\n"
+    end
+    print "-" * @grid.length * 5
+    print "\n"
+  end
+
   def place_random_ship
-    raise "board is full!" if self.full?
-    length = self.grid.size-1
+    raise "board is full!" if full?
+    length = @grid.size-1
     x = rand(0..length)
     y = rand(0..length)
-    self.grid[x][y] = :s if self.empty?([x,y])
+    @grid[x][y] = :s if self.empty?([x,y])
   end
 
   def won?
