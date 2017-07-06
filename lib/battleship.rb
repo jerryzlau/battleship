@@ -15,7 +15,7 @@ class BattleshipGame
     x, y = pos.first, pos.last
     if @board.grid[x][y] == :s
       @board.grid[x][y] = "\e[5m\e[41m*\e[25m\e[49m"
-      p @counter += 1
+      p "ships hit: #{@counter += 1}"
     else
       @board.grid[x][y] = :w
     end

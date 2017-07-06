@@ -1,5 +1,3 @@
-require "byebug"
-
 class Board
 
   attr_accessor :grid
@@ -75,24 +73,6 @@ class Board
     print "\n"
   end
 
-  # def place_random_ship
-  #     raise "board is full!" if full?
-  #     length = @grid.size-1
-  #     ship_size = [5,4,3,2].sample
-  #     x = rand(0..length)
-  #     y = rand(0..length)
-  #     @grid[x][y] = :s if self.empty?([x,y])
-  # end
-  #
-  # def build_ship(x,y,ship_size)
-  #   direction = ["n", "w", "s", "e"].sample
-  #
-  #   #check if it's out of bound
-  #
-  #   #check if it's overlaying other ships
-  #
-  # end
-
 
   def place_random_ship(size=2)
     raise "board is full!" if full?
@@ -167,12 +147,3 @@ class Board
   end
 
 end
-
-# if $0 == __FILE__
-#   board = Board.new
-#   5.times do
-#     ship_size = [1,2,3,4,5].sample
-#     board.make_ship(ship_size)
-#   end
-#   board.reveal
-# end
