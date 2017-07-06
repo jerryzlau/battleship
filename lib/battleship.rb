@@ -8,14 +8,16 @@ class BattleshipGame
   def initialize(player, board)
     @player = player
     @board = board
+    @counter = 0
   end
 
   def attack(pos)
     x, y = pos.first, pos.last
     if @board.grid[x][y] == :s
-      @board.grid[x][y] = "!"
+      @board.grid[x][y] = "\e[5m\e[41m*\e[25m\e[49m"
+      p @counter += 1
     else
-      @board.grid[x][y] = :x
+      @board.grid[x][y] = :w
     end
   end
 
@@ -35,18 +37,21 @@ class BattleshipGame
   def play
     until game_over?
       @board.display
+      #@board.reveal
       play_turn
     end
     @board.reveal
     puts "Congrats #{player.name}! You have won!"
   end
 
+
 end
 
 if $0 == __FILE__
   board = Board.new
-  5.times {board.place_random_ship}
-  player = HumanPlayer.new("Jerry")
+  5.times {board.place_random_ship(3)}
+  player = ComputerPlayer.new
+  #player = HumanPlayer.new
   battleship = BattleshipGame.new(player,board)
   battleship.play
 end
